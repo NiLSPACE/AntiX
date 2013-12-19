@@ -9,10 +9,8 @@ function Initialize(Plugin)
 	Plugin:SetVersion(1)
 	
 	cPluginManager.AddHook(cPluginManager.HOOK_PLAYER_MOVING, OnPlayerMoving)
-	cPluginManager.AddHook(cPluginManager.HOOK_PLAYER_JOINED, OnPlayerJoined)
+	cPluginManager.AddHook(cPluginManager.HOOK_PLAYER_SPAWNED, OnPlayerSpawned)
 	cPluginManager.AddHook(cPluginManager.HOOK_PLAYER_BREAKING_BLOCK, OnPlayerBreakingBlock)
-	
-	LoadPlayers()
 	
 	return true
 end
@@ -37,9 +35,10 @@ function OnPlayerBreakingBlock(Player, X, Y, Z, BlockFace, BlockType, BlockMeta)
 end
 		
 
-function OnPlayerJoined(Player)
+function OnPlayerSpawned(Player)
 	local Pos = Vector3i(math.floor(Player:GetPosX()), math.floor(Player:GetPosY()), math.floor(Player:GetPosZ()))
 	PlayerPos[Player:GetName()] = Pos
+	StreamPlayer(Player, Pos.x, Pos.y, Pos.z)
 end
 
 function OnPlayerMoving(Player)
@@ -73,6 +72,7 @@ function StreamPlayer(Player, PosX, PosY, PosZ)
 			end
 		end
 	end
+end
 
 function HasAir(World, X, Y, Z)
 	if (
@@ -87,4 +87,4 @@ function HasAir(World, X, Y, Z)
 	return false
 end
 	
-		
+LoadPlayers()
