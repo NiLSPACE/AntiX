@@ -12,6 +12,7 @@ function Initialize(Plugin)
 	cPluginManager.AddHook(cPluginManager.HOOK_PLAYER_SPAWNED, OnPlayerSpawned)
 	cPluginManager.AddHook(cPluginManager.HOOK_PLAYER_BREAKING_BLOCK, OnPlayerBreakingBlock)
 	
+	LoadPlayers()
 	return true
 end
 
@@ -86,5 +87,5 @@ function HasAir(World, X, Y, Z)
 	end
 	return false
 end
-	
-LoadPlayers()
+
+
