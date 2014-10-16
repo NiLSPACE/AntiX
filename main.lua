@@ -65,7 +65,7 @@ function StreamPlayer(Player, PosX, PosY, PosZ)
 		for Y = PosY - 10, PosY + 10 do
 			for Z = PosZ - 10, PosZ + 10 do
 				local Block = World:GetBlock(X, Y, Z)
-				if not g_BlockTransparent[Block] then
+				if not cBlockInfo:IsTransparent(Block) then
 					if not HasAir(World, X, Y, Z) then
 						ClientHandle:SendBlockChange(X, Y, Z, E_BLOCK_IRON_ORE, 0)
 					end
@@ -77,12 +77,12 @@ end
 
 function HasAir(World, X, Y, Z)
 	if (
-	g_BlockTransparent[World:GetBlock(X + 1, Y, Z)] or
-	g_BlockTransparent[World:GetBlock(X - 1, Y, Z)] or
-	g_BlockTransparent[World:GetBlock(X, Y + 1, Z)] or
-	g_BlockTransparent[World:GetBlock(X, Y - 1, Z)] or
-	g_BlockTransparent[World:GetBlock(X, Y, Z + 1)] or
-	g_BlockTransparent[World:GetBlock(X, Y, Z - 1)]) then
+		cBlockInfo:IsTransparent(World:GetBlock(X + 1, Y, Z)) or
+		cBlockInfo:IsTransparent(World:GetBlock(X - 1, Y, Z)) or
+		cBlockInfo:IsTransparent(World:GetBlock(X, Y + 1, Z)) or
+		cBlockInfo:IsTransparent(World:GetBlock(X, Y - 1, Z)) or
+		cBlockInfo:IsTransparent(World:GetBlock(X, Y, Z + 1))or
+		cBlockInfo:IsTransparent(World:GetBlock(X, Y, Z - 1))) then
 		return true
 	end
 	return false
