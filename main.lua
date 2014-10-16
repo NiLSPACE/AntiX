@@ -1,4 +1,15 @@
 
+g_Ores = {
+	E_BLOCK_COAL_ORE,
+	E_BLOCK_IRON_ORE,
+	E_BLOCK_GOLD_ORE,
+	E_BLOCK_DIAMOND_ORE,
+	E_BLOCK_REDSTONE_ORE,
+	E_BLOCK_LAPIS_ORE,
+}
+
+g_NumOres = #g_Ores
+
 PlayerPos = {}
 PLUGIN = nil
 
@@ -67,7 +78,7 @@ function StreamPlayer(Player, PosX, PosY, PosZ)
 				local Block = World:GetBlock(X, Y, Z)
 				if not cBlockInfo:IsTransparent(Block) then
 					if not HasAir(World, X, Y, Z) then
-						ClientHandle:SendBlockChange(X, Y, Z, E_BLOCK_IRON_ORE, 0)
+						ClientHandle:SendBlockChange(X, Y, Z, g_Ores[math.random(1, g_NumOres)], 0)
 					end
 				end
 			end
